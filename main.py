@@ -17,7 +17,6 @@ with open('erc20.json') as f:
 with open('router.json') as f:
     ROUTER_V3_ABI = json.load(f)
 
-
 QUOTER_CONTRACT_ADDRESS = web3.to_checksum_address('0xB048Bbc1Ee6b733FFfCFb9e9CeF7375518e25997')  # PancakeSwap QuoterV2
 QUOTER_CONTRACT = web3.eth.contract(address=QUOTER_CONTRACT_ADDRESS, abi=QUOTER_ABI)
 
@@ -39,8 +38,6 @@ private_key = "input your private key"
 gas_price = int(web3.eth.gas_price * 1.1) # Fetch the current gas price from the network
 print(f"Current Gas Price: {gas_price}")
 
-
-
 # Step 5: Get a Quote
 quote = QUOTER_CONTRACT.functions.quoteExactInputSingle(
     (BASE_TOKEN_ADDRESS, DESIRE_TOKEN_ADDRESS, amount_in_wei, FEE, 0)
@@ -56,14 +53,10 @@ print("the defined slippage in wei:", acceptable_slippage_wei)
 quote_human_readable = quote[0] / 10**18
 acceptable_slippage_human_readable = quote_human_readable * 0.999
 acceptable_slippage_wei = int(acceptable_slippage_human_readable * 10**18)
-
-# Calculate percentage difference
 percentage_difference = (1 - 0.999) * 100  # Since 0.999 is 99.9%
-
 print(f"Quote received: {quote_human_readable:.6f} USDT")
 print(f"Acceptable Slippage: {acceptable_slippage_human_readable:.6f} USDT")
 print(f"Slippage Difference: {percentage_difference:.2f}%")
-
 user_input = input("Proceed with the transaction? (yes/no): ").strip().lower()
 if user_input != "yes":
     print("Transaction canceled.")
@@ -71,7 +64,6 @@ if user_input != "yes":
 
 # Step 6: Approve Router to Spend Tokens
 amount_to_approve = web3.to_wei(amount+1, 'ether')  # Allow router to spend 10 CAKE (you can increase this)
-
 tx = BASE_TOKEN_CONTRACT.functions.approve(
     ROUTER_V3_ADDRESS, amount_to_approve
 ).build_transaction({
@@ -85,7 +77,6 @@ tx = BASE_TOKEN_CONTRACT.functions.approve(
 signed_tx = web3.eth.account.sign_transaction(tx, private_key)
 tx_hash = web3.eth.send_raw_transaction(signed_tx.raw_transaction)
 print(f"Approval TX Hash: {web3.to_hex(tx_hash)}")
-
 
 # Step 8: Perform the Swap
 swap_tx = ROUTER_CONTRACT.functions.exactInputSingle({
@@ -103,10 +94,6 @@ swap_tx = ROUTER_CONTRACT.functions.exactInputSingle({
     'gasPrice': gas_price,
     'nonce': web3.eth.get_transaction_count(user_address)+1,
 })
-
-# Sign and send the swap transaction
 signed_swap_tx = web3.eth.account.sign_transaction(swap_tx, private_key)
 swap_tx_hash = web3.eth.send_raw_transaction(signed_swap_tx.raw_transaction)
 print(f"Swap TX Hash: {web3.to_hex(swap_tx_hash)}")
-
-
