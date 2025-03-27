@@ -18,7 +18,9 @@ Pancakeswapv3 CAKE&lt;->USDT in 100 lines of code
 
 My thoughts:
 Pancakeswapv3 was more tricky to develop for. 
-The json files are Application Binary Interfaces (ABIs) and are needed for this to work. 
+The json files are Application Binary Interfaces (ABIs) and are needed for this to work.
+
+Although the nomenclature sounds like it is for ETH and for the ETH network, it is for Binance Smart Chain specifically (swapping of BEP20 tokens). 
 
 New to pancakeswap v3 is `amountOutMinimum` parameter which is how you define slippage. this feature is great. you see in my code, i am using 0.10% slippage, which is the cheapest you can use on the pancakeswap v3 ui as well.
 
