@@ -1,4 +1,19 @@
 # pancakeswapV3_simple_swap
+
+<pre>
+Current Gas Price: 1100000000
+Quote Object Recived [426764242236381548, 121127300365715601421805300498, 1, 115277]
+Quote received in human readable format: 0.42676424223638154 USDT
+the defined slippage is: 0.4263374779941452
+the defined slippage in wei: 426337477994145152
+Quote received: 0.426764 USDT
+Acceptable Slippage: 0.426337 USDT
+Slippage Difference: 0.10%
+Proceed with the transaction? (yes/no): yes
+Approval TX Hash: 0x484785a02382c78f5db53b411bc525fdd43e746832f1486453748f800e0b09dc
+Swap TX Hash: 0x6658cf6fb539191d344203dd7e31f47c9081aea4be3146138c568cc033353168
+</pre>
+
 Pancakeswapv3 CAKE&lt;->USDT in 100 lines of code
 
 My thoughts:
@@ -14,4 +29,5 @@ Pancakeswapv3 expects you to now interface with the `Quoter smart contract` via 
 I recommend you to still use the fee of 0.25% like my code is using. This is because 95% of liquidity proviers are providing liquidity on this tier only. you will see, the  quote you can get is usually not good when you change the fee %. Also like Pancakeswap v2, the quote you can get sometimes is not market accurate so you should have logic to reject bad quotes.   
 
 Please dontate 🥺 (i always need more BNB gas 😭)
+
 BNB: 0xE80089A6158901469e4DD3c13ac01f39BDF9bEE5 
