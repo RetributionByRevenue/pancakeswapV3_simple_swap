@@ -25,7 +25,7 @@ A simple Python engine for swapping tokens (e.g., USDT ↔ CAKE) on **PancakeSwa
 Install dependencies:
 
 ```bash
-pip install web3
+pip install web3==6.2.0
 ````
 
 ---
